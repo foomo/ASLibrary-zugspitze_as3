@@ -5,6 +5,7 @@
 	<name>ActionScript</name>
 	<description>Action Script 3 extension.</description>
 	<dependencies>
+		<id>org.foomo.flash</id>
 		<id>org.foomo.zugspitze.core</id>
 	</dependencies>
 </config>
