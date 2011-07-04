@@ -14,15 +14,16 @@
  * You should have received a copy of the GNU Lesser General Public License along with
  * the foomo Opensource Framework. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.foomo.zugspitze.apps
+package org.foomo.zugspitze.as3.core
 {
-	import org.foomo.zugspitze.core.ZugspitzeController;
-	import org.foomo.zugspitze.core.ZugspitzeModel;
-	import org.foomo.zugspitze.core.Zugspitze;
-	import org.foomo.zugspitze.events.ZugspitzeEvent;
-
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
+
+	import org.foomo.zugspitze.core.IApplication;
+	import org.foomo.zugspitze.core.Zugspitze;
+	import org.foomo.zugspitze.core.ZugspitzeController;
+	import org.foomo.zugspitze.core.ZugspitzeModel;
+	import org.foomo.zugspitze.events.ZugspitzeEvent;
 
 	[Event(name="zugspitzeControllerChanged", type="org.foomo.zugspitze.events.ZugspitzeEvent")]
 	[Event(name="zugspitzeModelChanged", type="org.foomo.zugspitze.events.ZugspitzeEvent")]
@@ -37,7 +38,7 @@ package org.foomo.zugspitze.apps
 	 * @license http://www.gnu.org/licenses/lgpl.txt
 	 * @author  franklin <franklin@weareinteractive.com>
 	 */
-	public class ZugspitzeSpriteComponent extends Sprite implements IApplication
+	public class ZugspitzeSpriteApplication extends Sprite implements IApplication
 	{
 		//-----------------------------------------------------------------------------------------
 		// ~ Variables
@@ -46,21 +47,21 @@ package org.foomo.zugspitze.apps
 		/**
 		 * @private
 		 */
-		private var _zugspitze:Zugspitze;
+		protected static var _zugspitze:Zugspitze;
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Constructor
 		//-----------------------------------------------------------------------------------------
 
-		public function ZugspitzeSpriteComponent()
+		public function ZugspitzeSpriteApplication()
 		{
 			super();
-			this._zugspitze = new Zugspitze(this);
-			this._zugspitze.addEventListener(ZugspitzeEvent.ZUGSPITZE_VIEW_CHANGED, this.zugspitzeEventHandler, false, 0, true)
-			this._zugspitze.addEventListener(ZugspitzeEvent.ZUGSPITZE_VIEW_ADD, this.zugspitzeEventHandler, false, 0, true)
-			this._zugspitze.addEventListener(ZugspitzeEvent.ZUGSPITZE_VIEW_REMOVE, this.zugspitzeEventHandler, false, 0, true)
-			this._zugspitze.addEventListener(ZugspitzeEvent.ZUGSPITZE_MODEL_CHANGED, this.zugspitzeEventHandler, false, 0, true)
-			this._zugspitze.addEventListener(ZugspitzeEvent.ZUGSPITZE_CONTROLLER_CHANGED, this.zugspitzeEventHandler, false, 0, true)
+			_zugspitze = new Zugspitze(this);
+			_zugspitze.addEventListener(ZugspitzeEvent.ZUGSPITZE_VIEW_CHANGED, this.zugspitzeEventHandler, false, 0, true)
+			_zugspitze.addEventListener(ZugspitzeEvent.ZUGSPITZE_VIEW_ADD, this.zugspitzeEventHandler, false, 0, true)
+			_zugspitze.addEventListener(ZugspitzeEvent.ZUGSPITZE_VIEW_REMOVE, this.zugspitzeEventHandler, false, 0, true)
+			_zugspitze.addEventListener(ZugspitzeEvent.ZUGSPITZE_MODEL_CHANGED, this.zugspitzeEventHandler, false, 0, true)
+			_zugspitze.addEventListener(ZugspitzeEvent.ZUGSPITZE_CONTROLLER_CHANGED, this.zugspitzeEventHandler, false, 0, true)
 		}
 
 		//-----------------------------------------------------------------------------------------
@@ -72,7 +73,7 @@ package org.foomo.zugspitze.apps
 		 */
 		public function set controllerClass(value:Class):void
 		{
-			this._zugspitze.controllerClass = value;
+			_zugspitze.controllerClass = value;
 		}
 
 		/**
@@ -80,7 +81,7 @@ package org.foomo.zugspitze.apps
 		 */
 		public function set modelClass(value:Class):void
 		{
-			this._zugspitze.modelClass = value;
+			_zugspitze.modelClass = value;
 		}
 
 		/**
@@ -88,7 +89,7 @@ package org.foomo.zugspitze.apps
 		 */
 		public function set viewClass(value:Class):void
 		{
-			this._zugspitze.viewClass = value;
+			_zugspitze.viewClass = value;
 		}
 
 		/**
@@ -96,7 +97,7 @@ package org.foomo.zugspitze.apps
 		 */
 		public function set controller(value:ZugspitzeController):void
 		{
-			this._zugspitze.controller = value;
+			_zugspitze.controller = value;
 		}
 
 		/**
@@ -104,7 +105,7 @@ package org.foomo.zugspitze.apps
 		 */
 		public function set model(value:ZugspitzeModel):void
 		{
-			this._zugspitze.model = value;
+			_zugspitze.model = value;
 		}
 
 		/**
@@ -112,7 +113,7 @@ package org.foomo.zugspitze.apps
 		 */
 		public function set view(value:DisplayObject):void
 		{
-			this._zugspitze.view = value;
+			_zugspitze.view = value;
 		}
 
 		/**
@@ -120,7 +121,7 @@ package org.foomo.zugspitze.apps
 		 */
 		public function get application():IApplication
 		{
-			return this._zugspitze.application;
+			return _zugspitze.application;
 		}
 
 		/**
@@ -128,7 +129,7 @@ package org.foomo.zugspitze.apps
 		 */
 		public function get controller():ZugspitzeController
 		{
-			return this._zugspitze.controller;
+			return _zugspitze.controller;
 		}
 
 		/**
@@ -136,7 +137,7 @@ package org.foomo.zugspitze.apps
 		 */
 		public function get model():ZugspitzeModel
 		{
-			return this._zugspitze.model;
+			return _zugspitze.model;
 		}
 
 		/**
@@ -144,7 +145,7 @@ package org.foomo.zugspitze.apps
 		 */
 		public function get view():DisplayObject
 		{
-			return this._zugspitze.view;
+			return _zugspitze.view;
 		}
 
 		//-----------------------------------------------------------------------------------------
